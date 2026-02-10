@@ -960,21 +960,9 @@ def main() -> None:
     )
     logger.info("Scheduled tasks started")
 
-    if ENV == "dev":
-        # On Local Environment
-        # Run the bot until the user presses Ctrl-C
-        # Pass 'allowed_updates' handle *all* updates including `chat_member` updates
-        # To reset this, simply pass `allowed_updates=[]`
-        application.run_polling(allowed_updates=Update.ALL_TYPES)
-    else:
-        # On Render - Production Environment
-        application.run_webhook(
-            listen="0.0.0.0",
-            port=PORT,
-            url_path=TELEGRAM_TOKEN,
-            webhook_url=RENDER_APP_URL + TELEGRAM_TOKEN,
-        )
+    application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
 if __name__ == "__main__":
     main()
+    
